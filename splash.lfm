@@ -1,0 +1,27 @@
+object FormSplash: TFormSplash
+  Left = 615
+  Height = 618
+  Top = 229
+  Width = 836
+  BorderStyle = bsNone
+  Caption = 'FormSplash'
+  ClientHeight = 618
+  ClientWidth = 836
+  DesignTimePPI = 168
+  FormStyle = fsSystemStayOnTop
+  OnCreate = FormCreate
+  LCLVersion = '2.2.0.4'
+  object Image1: TImage
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 0
+    Height = 618
+    Top = 0
+    Width = 836
+    Anchors = [akTop, akLeft, akRight, akBottom]
+  end
+end
