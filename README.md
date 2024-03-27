@@ -1,3 +1,5 @@
+# <img src="./docs/assets/icon.png" width="32"/> EyeGuard 
+
 EyeGuard is an application designed with one primary goal in mind: to safeguard and protect your precious eyesight.
 
 # Configuration
