@@ -5,7 +5,14 @@ unit Main;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls
+  Classes
+  , SysUtils
+  , Forms
+  , Controls
+  , Graphics
+  , Dialogs
+  , StdCtrls
+  , ExtCtrls
   , Menus
   , DateUtils
   , IniFiles
@@ -43,8 +50,8 @@ type
     procedure TrayMenuItemMainClick(Sender: TObject);
     procedure TrayMenuItemWorkClick(Sender: TObject);
     procedure TrayIcon1DblClick(Sender: TObject);
-    procedure TrayIcon1MouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
+    procedure TrayIcon1MouseMove(Sender: TObject; Shift: TShiftState;
+                                  X,Y: Integer);
     procedure WorkTimerTimer(Sender: TObject);
   private
     procedure stopWork();
@@ -69,8 +76,6 @@ implementation
 {$R *.lfm}
 
 { TFormMain }
-
-{$define TRAY_MENU_BREAK 'break now !'}
 
 procedure TFormMain.initAllTimers();
 var
@@ -189,7 +194,6 @@ begin
   FormMain.ShowOnTop;
 end;
 
-
 procedure TFormMain.TrayIcon1MouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
 var
@@ -200,13 +204,15 @@ begin
     begin
       mins := SecondsBetween(Now, workEndTime) div 60;
       secs := SecondsBetween(Now, workEndTime) mod 60;
-      TrayIcon1.Hint:=  mins.ToString + ' minuts '+ secs.ToString +' seconds to next break time';
+      TrayIcon1.Hint:=  mins.ToString + ' minuts '
+                      + secs.ToString + ' seconds ' + 'to next break time';
     end;
   stBreak:
     begin
       mins := SecondsBetween(Now, breakEndTime) div 60;
       secs := SecondsBetween(Now, breakEndTime) mod 60;
-      TrayIcon1.Hint:=  mins.ToString + ' minuts '+ secs.ToString +' seconds to next work time';
+      TrayIcon1.Hint:=  mins.ToString + ' minuts '
+                      + secs.ToString + ' seconds ' + 'to next work time';
     end;
   end;
 
@@ -229,8 +235,10 @@ begin
   //save settings
    try
      IniFile := TIniFile.Create(CONFIG_FILE);
-     IniFile.WriteInteger('UserSettings', 'workTime', StrToInt(WorkComboBox.Text));
-     IniFile.WriteInteger('UserSettings', 'breakTime', StrToInt(BreakComboBox.Text));
+     IniFile.WriteInteger('UserSettings', 'workTime'
+                         , StrToInt(WorkComboBox.Text) );
+     IniFile.WriteInteger('UserSettings', 'breakTime'
+                         , StrToInt(BreakComboBox.Text) );
      IniFile.Free;
    except
      on E: Exception do
@@ -255,8 +263,6 @@ begin
   FormMain.Hide;
   CloseAction := caNone;
 end;
-
-
 
 end.
 
