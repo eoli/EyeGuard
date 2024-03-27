@@ -53,13 +53,16 @@ type
   public
 
   end;
+
+  TState = (stWork, stBreak);
 const
   CONFIG_FILE = 'config.ini';
 
 var
   FormMain: TFormMain;
   FormSplash: TFormSplash;
-  nextBreakTime : TDateTime;
+  workEndTime, breakEndTime : TDateTime;
+  currentState: TState;
 
 implementation
 
@@ -91,11 +94,13 @@ begin
   WorkTimer.Enabled := True;
   BreakTimer.Enabled := False;
 
-  nextBreakTime := IncSecond(Now, WorkTimer.Interval div 1000);
+  workEndTime := IncSecond(Now, WorkTimer.Interval div 1000);
 
   // hide splash
   FormSplash.Hide;
   TrayMenuItemBreakNow.Enabled:=True;
+
+  currentState := stWork;
 end;
 
 procedure TFormMain.stopWork();
@@ -103,9 +108,13 @@ begin
   WorkTimer.Enabled := False;
   BreakTimer.Enabled := True;
 
+  breakEndTime := IncSecond(Now, BreakTimer.Interval div 1000);
+
   // show splash
   FormSplash.ShowOnTop;
   TrayMenuItemBreakNow.Enabled:=False;
+
+  currentState := stBreak;
 end;
 
 procedure TFormMain.FormCreate(Sender: TObject);
@@ -186,9 +195,21 @@ procedure TFormMain.TrayIcon1MouseMove(Sender: TObject; Shift: TShiftState; X,
 var
   mins, secs: Integer;
 begin
-  mins := SecondsBetween(Now, nextBreakTime) div 60;
-  secs := SecondsBetween(Now, nextBreakTime) mod 60;
-  TrayIcon1.Hint:=  mins.ToString + ' minuts '+ secs.ToString +' seconds to next break time';
+  case currentState of
+  stWork:
+    begin
+      mins := SecondsBetween(Now, workEndTime) div 60;
+      secs := SecondsBetween(Now, workEndTime) mod 60;
+      TrayIcon1.Hint:=  mins.ToString + ' minuts '+ secs.ToString +' seconds to next break time';
+    end;
+  stBreak:
+    begin
+      mins := SecondsBetween(Now, breakEndTime) div 60;
+      secs := SecondsBetween(Now, breakEndTime) mod 60;
+      TrayIcon1.Hint:=  mins.ToString + ' minuts '+ secs.ToString +' seconds to next work time';
+    end;
+  end;
+
 end;
 
 procedure TFormMain.WorkTimerTimer(Sender: TObject);
