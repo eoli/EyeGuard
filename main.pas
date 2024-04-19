@@ -191,7 +191,7 @@ end;
 
 procedure TFormMain.TrayIcon1DblClick(Sender: TObject);
 begin
-  FormMain.ShowOnTop;
+  //FormMain.ShowOnTop;
 end;
 
 procedure TFormMain.TrayIcon1MouseMove(Sender: TObject; Shift: TShiftState; X,
