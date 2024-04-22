@@ -547,7 +547,6 @@ object FormMain: TFormMain
       F7F7D30000000049454E44AE426082
     }
     Visible = True
-    OnDblClick = TrayIcon1DblClick
     OnMouseMove = TrayIcon1MouseMove
     Left = 576
     Top = 104
