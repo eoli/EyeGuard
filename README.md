@@ -20,9 +20,6 @@ maxBreakTime=15
 You can replace the splash image by placing `bg.png` in the root directory of the executable.
 
 # Snapshots
-## default splash
-![](./docs/assets/Snipaste_2024-03-26_21-44-07.png)
-
 ## customized splash (demo)
 ![](./docs/assets/Snipaste_2024-03-26_21-45-18.png)
 
